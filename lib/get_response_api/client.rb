@@ -22,6 +22,9 @@ module GetResponseApi
       end
       @connection.request(:get, "/contacts?#{query}")
     end
+    
+    def remove_contact contact_id
+      @connection.request(:delete, "/contacts/#{contact_id}")
     end
 
     def custom_fields
