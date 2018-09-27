@@ -13,13 +13,15 @@ module GetResponseApi
     end
     
     def contacts options = {}
+      query = ""
       if options[:campaign_id]
-        @connection.request(:get, "/contacts?query[campaignId]=#{options[:campaign_id]}")
-      elsif options[:email_address]
-        @connection.request(:get, "/contacts?query[email]=#{options[:email_address]}")
-      else
-        @connection.request(:get, '/contacts')
+        query += "query[campaignId]=#{options[:campaign_id]}&"
       end
+      if options[:email_address]
+        query += "query[email]=#{options[:email_address]}&"
+      end
+      @connection.request(:get, "/contacts?#{query}")
+    end
     end
 
     def custom_fields
